@@ -16,7 +16,5 @@ namespace T2207A
         public abstract void UpdatePhone(string name, string newphone);
         public abstract void SearchPhone(string name);
         public abstract void Sort();
-
-       
     }
 }

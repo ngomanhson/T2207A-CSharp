@@ -25,6 +25,7 @@ namespace T2207A
                     break;
                 }
             }
+
             if (!existed)
             {
                 PhoneList.Add(new string[] { name, phone });
