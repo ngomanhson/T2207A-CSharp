@@ -21,9 +21,19 @@ public class Program
         sdt.RemovePhone("Hoang");
 
         sdt.Sort();
+
+        News news = new News();
+        news.Id = 1;
+        news.Title = "Hello World";
+        news.PublishDate = "21-04-2023";
+        news.Author = "Ngo Manh Son";
+        news.Content = "This is an example news.";
+        int[] rateList = { 3, 4, 5 };
+        news.Calculate(rateList);
+        news.Display();
     }
 }
-  
 
-   
+
+
 
