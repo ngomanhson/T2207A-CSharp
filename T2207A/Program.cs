@@ -5,6 +5,8 @@ using System;
 
 public class Program
 {
+    
+
     public static void Main(String[] args)
     {
         PhoneBook sdt = new PhoneBook();
@@ -31,6 +33,58 @@ public class Program
         int[] rateList = { 3, 4, 5 };
         news.Calculate(rateList);
         news.Display();
+
+        QuanLySinhVien quanLySinhVien = new QuanLySinhVien();
+        int chucNang = 0;
+        do
+        {
+            Console.WriteLine("Chon chuc nang:");
+            Console.WriteLine("1. Them sinh vien");
+            Console.WriteLine("2. Cap nhat thong tin sv boi ID");
+            Console.WriteLine("3. Xoa sv boi ID");
+            Console.WriteLine("4. Tim kiem sv theo ten");
+            Console.WriteLine("5. Sap xep sv theo diem trung binh (GPA)");
+            Console.WriteLine("6. Sap xep sv theo ten");
+            Console.WriteLine("7. Sap xep sv theo ID");
+            Console.WriteLine("8. Hien thi danh sach sv");
+            Console.WriteLine("0. Thoat");
+            Console.Write("Chon chuc nang: ");
+            chucNang = int.Parse(Console.ReadLine());
+            switch (chucNang)
+            {
+                case 1:
+                    quanLySinhVien.ThemSinhVien();
+                    break;
+                case 2:
+                    quanLySinhVien.CapNhatSinhVien();
+                    break;
+                case 3:
+                    quanLySinhVien.XoaSinhVien();
+                    break;
+                case 4:
+                    quanLySinhVien.TimKiemSinhVien();
+                    break;
+                case 5:
+                    quanLySinhVien.SapXepTheoDiemTrungBinh();
+                    break;
+                case 6:
+                    quanLySinhVien.SapXepTheoTen();
+                    break;
+                case 7:
+                    quanLySinhVien.SapXepTheoID();
+                    break;
+                case 8:
+                    quanLySinhVien.HienThiDanhSachSinhVien();
+                    break;
+                case 0:
+                    Console.WriteLine("Ket thuc");
+                    break;
+                default:
+                    Console.WriteLine("Chuc nang khong ton tai!");
+                    break;
+            }
+            Console.WriteLine();
+        } while (chucNang != 0);
     }
 }
 
