@@ -5,86 +5,100 @@ using System;
 
 public class Program
 {
-    
+
+    static List<Product> products = new List<Product>();
 
     public static void Main(String[] args)
     {
-        PhoneBook sdt = new PhoneBook();
-
-        sdt.insertPhone("Son", "0123456");
-        sdt.insertPhone("Hoang", "0654321");
-        sdt.insertPhone("Vu", "0987654");
-
-        sdt.SearchPhone("Son");
-        sdt.SearchPhone("Hoang");
-        sdt.SearchPhone("Duong");
-
-        sdt.UpdatePhone("Son", "088888888");
-        sdt.RemovePhone("Hoang");
-
-        sdt.Sort();
-
-        News news = new News();
-        news.Id = 1;
-        news.Title = "Hello World";
-        news.PublishDate = "21-04-2023";
-        news.Author = "Ngo Manh Son";
-        news.Content = "This is an example news.";
-        int[] rateList = { 3, 4, 5 };
-        news.Calculate(rateList);
-        news.Display();
-
-        QuanLySinhVien quanLySinhVien = new QuanLySinhVien();
-        int chucNang = 0;
+        int choice;
         do
         {
-            Console.WriteLine("Chon chuc nang:");
-            Console.WriteLine("1. Them sinh vien");
-            Console.WriteLine("2. Cap nhat thong tin sv boi ID");
-            Console.WriteLine("3. Xoa sv boi ID");
-            Console.WriteLine("4. Tim kiem sv theo ten");
-            Console.WriteLine("5. Sap xep sv theo diem trung binh (GPA)");
-            Console.WriteLine("6. Sap xep sv theo ten");
-            Console.WriteLine("7. Sap xep sv theo ID");
-            Console.WriteLine("8. Hien thi danh sach sv");
-            Console.WriteLine("0. Thoat");
-            Console.Write("Chon chuc nang: ");
-            chucNang = int.Parse(Console.ReadLine());
-            switch (chucNang)
+            Console.WriteLine("Menu:");
+            Console.WriteLine("1. Add product records");
+            Console.WriteLine("2. Display product records");
+            Console.WriteLine("3. Delete product by Id");
+            Console.WriteLine("4. Exit");
+
+            Console.Write("Enter your choice (1-4): ");
+            choice = int.Parse(Console.ReadLine());
+
+            switch (choice)
             {
                 case 1:
-                    quanLySinhVien.ThemSinhVien();
+                    AddProduct();
                     break;
                 case 2:
-                    quanLySinhVien.CapNhatSinhVien();
+                    DisplayProducts();
                     break;
                 case 3:
-                    quanLySinhVien.XoaSinhVien();
+                    DeleteProduct();
                     break;
                 case 4:
-                    quanLySinhVien.TimKiemSinhVien();
-                    break;
-                case 5:
-                    quanLySinhVien.SapXepTheoDiemTrungBinh();
-                    break;
-                case 6:
-                    quanLySinhVien.SapXepTheoTen();
-                    break;
-                case 7:
-                    quanLySinhVien.SapXepTheoID();
-                    break;
-                case 8:
-                    quanLySinhVien.HienThiDanhSachSinhVien();
-                    break;
-                case 0:
-                    Console.WriteLine("Ket thuc");
+                    Console.WriteLine("Exiting program...");
                     break;
                 default:
-                    Console.WriteLine("Chuc nang khong ton tai!");
+                    Console.WriteLine("Invalid choice, try again.");
                     break;
             }
+
             Console.WriteLine();
-        } while (chucNang != 0);
+        } while (choice != 4);
+
+        static void AddProduct()
+        {
+            Console.WriteLine("Enter product details:");
+
+            Console.Write("Product ID: ");
+            string id = Console.ReadLine();
+
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Price: ");
+            decimal price = decimal.Parse(Console.ReadLine());
+
+            Product product = new Product(id, name, price);
+            products.Add(product);
+
+            Console.WriteLine("Product added.");
+        }
+
+        static void DisplayProducts()
+        {
+            if (products.Count == 0)
+            {
+                Console.WriteLine("No products to display.");
+            }
+            else
+            {
+                Console.WriteLine("Product list:");
+              
+                Console.WriteLine("{0,-10} {1,-20} {2,-30}", "ProductID","ProductName","Price");
+
+                foreach (Product product in products)
+                {
+                    Console.WriteLine("{0,-10} {1,-20} {2,-30}", product.Id, product.Name, "$" + product.Price);
+                }
+                
+            }
+        }
+
+        static void DeleteProduct()
+        {
+            Console.Write("Enter product ID to delete: ");
+            string id = Console.ReadLine();
+
+            int index = products.FindIndex(product => product.Id == id);
+            if (index == -1)
+            {
+                Console.WriteLine("Product not found.");
+            }
+            else
+            {
+                products.RemoveAt(index);
+                Console.WriteLine("Product deleted.");
+            }
+        }
     }
 }
 
